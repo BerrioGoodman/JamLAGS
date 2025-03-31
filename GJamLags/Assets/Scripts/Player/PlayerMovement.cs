@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool isVisible;
     public static bool canInvisible;
     public static float powerDuration = 2f;
-    public static float powerCoolDown = 5f;
+    public static float powerCoolDown = 2f;
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 50f;
     [SerializeField] private bool canDash;
@@ -76,5 +76,4 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
-    
 }
