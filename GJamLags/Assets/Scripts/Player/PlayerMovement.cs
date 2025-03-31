@@ -12,40 +12,39 @@ public class PlayerMovement : MonoBehaviour
     [Header("Invisible")]
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Color color1, color2;
-    public static bool isVisible = true;
-    public static float power = 10f;
+    public static bool isVisible;
+    public static bool canInvisible;
+    public static float powerDuration = 2f;
+    public static float powerCoolDown = 5f;
     [Header("Dash")]
-    [SerializeField] private float dashForce = 20f;
+    [SerializeField] private float dashSpeed = 50f;
+    [SerializeField] private bool canDash;
+    [SerializeField] private bool isDashing;
+    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] private float dashCoolDown = 0.5f;
+
+
     void Start()
     {
+        canDash = true;
+        isVisible = true;
+        canInvisible = true;
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        if (isDashing) return;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(KeyCode.C) && canDash) StartCoroutine(Dash());
+        if (Input.GetKeyDown(KeyCode.Space) && canInvisible) StartCoroutine(Invisible());
     }
     private void FixedUpdate()
     {
+        if (isDashing) return;
         MovePlayer();
-        power = Mathf.Clamp(power, -1, 10);
-        power += Time.fixedDeltaTime;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isVisible)
-            {
-                Invisible();
-                power -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                Visible();
-                power += Time.fixedDeltaTime;
-            }
-        }
-        Dash();
     }
     //Movement Mechanic
     public void MovePlayer()
@@ -53,26 +52,29 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
     }
     //Invisible Mechanic
-    public void Invisible()
+    public IEnumerator Invisible()
     {
-        sprite.color = color2;
         isVisible = false;
+        canInvisible = false;
+        sprite.color = color2;
         Debug.Log(isVisible);
-    }
-    public void Visible()
-    {
-        sprite.color = color1;
+        yield return new WaitForSeconds(powerDuration);
         isVisible = true;
-        Debug.Log(isVisible);
+        sprite.color = color1;
+        yield return new WaitForSeconds(powerCoolDown);
+        canInvisible = true;
     }
     //Dash Mechanic
-    public void Dash()
+    public IEnumerator Dash()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            rb.AddForce(movement * dashForce, ForceMode2D.Impulse);
-            Debug.Log("Dash");
-        }
+        canDash = false;
+        isDashing = true;
+        rb.MovePosition(rb.position + movement * dashSpeed * Time.fixedDeltaTime);
+        Debug.Log("Dash");
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+        yield return new WaitForSeconds(dashCoolDown);
+        canDash = true;
     }
     
 }

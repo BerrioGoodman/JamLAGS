@@ -339,7 +339,11 @@ MonoBehaviour:
   sprite: {fileID: 2087366360}
   color1: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 1, g: 1, b: 1, a: 0.27450982}
-  dashForce: 20
+  dashSpeed: 50
+  canDash: 1
+  isDashing: 0
+  dashDuration: 0.5
+  dashCoolDown: 0.5
 --- !u!212 &2087366360
 SpriteRenderer:
   m_ObjectHideFlags: 0
