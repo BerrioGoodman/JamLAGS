@@ -9,12 +9,17 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField] private float speed = 5f;
     private Vector2 movement;
+    [Header("Invisible")]
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Color color1, color2;
+    public static bool isVisible = true;
+    public static float power = 10f;
     [Header("Dash")]
     [SerializeField] private float dashForce = 20f;
-    [SerializeField] private float dashTime = 2f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -24,12 +29,50 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //Movement mechanic
-        rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
-        //Dash
-        if (Input.GetKey(KeyCode.C) && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        MovePlayer();
+        power = Mathf.Clamp(power, -1, 10);
+        power += Time.fixedDeltaTime;
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
+            if (isVisible)
+            {
+                Invisible();
+                power -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                Visible();
+                power += Time.fixedDeltaTime;
+            }
+        }
+        Dash();
+    }
+    //Movement Mechanic
+    public void MovePlayer()
+    {
+        rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
+    }
+    //Invisible Mechanic
+    public void Invisible()
+    {
+        sprite.color = color2;
+        isVisible = false;
+        Debug.Log(isVisible);
+    }
+    public void Visible()
+    {
+        sprite.color = color1;
+        isVisible = true;
+        Debug.Log(isVisible);
+    }
+    //Dash Mechanic
+    public void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            rb.AddForce(movement * dashForce, ForceMode2D.Impulse);
+            Debug.Log("Dash");
         }
     }
+    
 }
