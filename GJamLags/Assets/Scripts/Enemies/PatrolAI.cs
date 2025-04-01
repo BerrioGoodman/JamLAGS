@@ -8,7 +8,6 @@ public class PatrolAI : MonoBehaviour
 {
     [Header("Instancias")]
     [SerializeField] private Transform[] waypoints;
-    [SerializeField] private Rigidbody2D rbEnemy;
     
     [Header("Parametros")]
     [SerializeField] private float patrolSpeed;
@@ -19,14 +18,12 @@ public class PatrolAI : MonoBehaviour
     private bool isWaiting;
     private int currentWaypoint = 0;
     
-    
-    private void Start()
-    {
-        rbEnemy = GetComponent<Rigidbody2D>();
-    }
 
     private void Update()
     {
+
+        bool isMovingleft = waypoints[currentWaypoint].position.x < transform.position.x;
+        RotateEnemy(isMovingleft);
         
         if (transform.position != waypoints[currentWaypoint].position)
         {
@@ -34,8 +31,7 @@ public class PatrolAI : MonoBehaviour
             
         }else if (!isWaiting)
         {
-            StartCoroutine(Wait());
-            
+            StartCoroutine(Wait()); 
         }
     }
 
@@ -49,5 +45,11 @@ public class PatrolAI : MonoBehaviour
             currentWaypoint = 0;
         }
         isWaiting = false;
+    }
+
+    private void RotateEnemy(bool faceLeft)
+    {
+        //Rota al enemigo en el eje Y si se mueve a la izquierda
+        transform.rotation = Quaternion.Euler(0, faceLeft ? 180 : 0, 0);
     }
 }
