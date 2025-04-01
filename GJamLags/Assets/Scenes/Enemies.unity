@@ -277,9 +277,10 @@ GameObject:
   m_Component:
   - component: {fileID: 724848242}
   - component: {fileID: 724848241}
-  - component: {fileID: 724848244}
   - component: {fileID: 724848243}
+  - component: {fileID: 724848244}
   - component: {fileID: 724848245}
+  - component: {fileID: 724848246}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -399,33 +400,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &724848244
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &724848244
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724848240}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6b22e590dff454eab5a873971d068e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 1319004011}
+  - {fileID: 987435879}
+  - {fileID: 300439709}
+  - {fileID: 268896647}
+  - {fileID: 1533409926}
+  enemySpeed: 3
+  EnemyVision: {fileID: 724848245}
 --- !u!114 &724848245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +428,27 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724848240}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87ba2110b145fb459924c564aa3c6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 5
+  viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  PlayerMovement: {fileID: 0}
+--- !u!114 &724848246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724848240}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fef633b1a8b298048a2ae2de2d3e2a91, type: 3}
   m_Name: 
@@ -444,10 +459,9 @@ MonoBehaviour:
   - {fileID: 300439709}
   - {fileID: 268896647}
   - {fileID: 1533409926}
-  rbEnemy: {fileID: 0}
-  patrolSpeed: 4
+  patrolSpeed: 3
   minDistance: 0.2
-  waitTime: 2
+  waitTime: 1.5
 --- !u!1 &987435878
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,13 +872,14 @@ GameObject:
   - component: {fileID: 1659335917}
   - component: {fileID: 1659335919}
   - component: {fileID: 1659335920}
+  - component: {fileID: 1659335921}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1659335917
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -926,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 1659335916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 2, z: 0}
+  m_LocalPosition: {x: 7.05, y: -1.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -946,8 +961,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   speed: 5
-  dashForce: 20
-  dashTime: 2
+  sprite: {fileID: 0}
+  color1: {r: 0, g: 0, b: 0, a: 0}
+  color2: {r: 0, g: 0, b: 0, a: 0}
+  dashSpeed: 50
+  canDash: 0
+  isDashing: 0
+  dashDuration: 0.5
+  dashCoolDown: 0.5
 --- !u!50 &1659335920
 Rigidbody2D:
   serializedVersion: 4
@@ -975,6 +996,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
+--- !u!70 &1659335921
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659335916}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &2042132897
 GameObject:
   m_ObjectHideFlags: 0
