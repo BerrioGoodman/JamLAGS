@@ -1701,8 +1701,6 @@ GameObject:
   - component: {fileID: 2087366356}
   - component: {fileID: 2087366360}
   - component: {fileID: 2087366359}
-  - component: {fileID: 2087366362}
-  - component: {fileID: 2087366361}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1814,11 +1812,16 @@ MonoBehaviour:
   sprite: {fileID: 2087366360}
   color1: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 1, g: 1, b: 1, a: 0.27450982}
+  invisibleBar: {fileID: 215827614}
+  invisiblePoints: 0
   dashSpeed: 50
-  canDash: 1
+  canDash: 0
   isDashing: 0
   dashDuration: 0.5
   dashCoolDown: 0.5
+  healthPoints: 0
+  healthView: {fileID: 18789460}
+  damage: 1
 --- !u!212 &2087366360
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1871,33 +1874,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2087366361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087366355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafc659d8aac4c5449970c2ff0edfcdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invisibleBar: {fileID: 215827614}
-  invisiblePoints: 0
---- !u!114 &2087366362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087366355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3767457ab227340a93350fb99533bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healtView: {fileID: 18789460}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
