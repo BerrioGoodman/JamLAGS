@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Color color1, color2;
     public static bool isVisible;
     public static bool canInvisible;
-    public static float powerDuration = 5f;
+    public static float powerDuration = 2f;
     public static float powerCoolDown = 5f;
     [Header("Invisible Power")]
     [SerializeField] private Image invisibleBar;
@@ -41,11 +41,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
-
     void Update()
     {
-        //If is dashing or pause, stop every mechanic
-        if (isDashing) return;
+        //If is dashing or paused, stop every mechanic
+        if (isDashing || PauseMenu.isPaused) return;
         //Inputs for movement
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -59,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //If is dashing or pause, stop every mechanic
-        if (isDashing) return;
+        //If is dashing or paused, stop every mechanic
+        if (isDashing || PauseMenu.isPaused) return;
         //Movement method
         MovePlayer();
     }
@@ -107,8 +106,8 @@ public class PlayerMovement : MonoBehaviour
     //Invisible power
     public void InvisiblePower()
     {
-        invisiblePoints = 5f;
-        invisibleBar.fillAmount = invisiblePoints / 5;
+        invisiblePoints = 2f;
+        invisibleBar.fillAmount = invisiblePoints / 2;
     }
     public void LoadPower()
     {

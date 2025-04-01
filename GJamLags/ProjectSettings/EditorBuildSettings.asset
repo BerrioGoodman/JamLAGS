@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Probe1.unity
     guid: be068314bb95d614fa7df1412caa8df1
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 41d15b91cfc915a4ab1bdc5e49fd4686
   m_configObjects: {}

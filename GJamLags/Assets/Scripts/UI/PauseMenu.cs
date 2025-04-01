@@ -32,4 +32,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
         isPaused = false;
     }
+    //Go to the credits Scene
+    public void GotoCredits()
+    {
+        SceneManager.LoadScene("Credits");
+        Time.timeScale = 1.0f;
+        isPaused = false;
+    }
 }
