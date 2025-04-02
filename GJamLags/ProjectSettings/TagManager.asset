@@ -44,9 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 3851331671
     locked: 0
-  - name: ambientation
-    uniqueID: 3291603671
-    locked: 0
   - name: Player/Enemy
     uniqueID: 4124095179
+    locked: 0
+  - name: ambientation
+    uniqueID: 3291603671
     locked: 0

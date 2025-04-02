@@ -7,12 +7,20 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private float enemySpeed = 3f;
     [SerializeField] EnemyVision EnemyVision;
+    [SerializeField] private AIchase AIchase;   
     private int currentWaypoint = 0;
     
 
     private void Update()
     {
-        if(waypoints.Length == 0) return; 
+        if(waypoints.Length == 0) return;
+
+        if (EnemyVision.PlayerDetected && EnemyVision.Player != null)
+        {
+            AIchase.enabled = true;
+            this.enabled = false;
+            return;
+        }
 
         Transform target = waypoints[currentWaypoint];
         transform.position = Vector2.MoveTowards(transform.position, target.position, enemySpeed * Time.deltaTime);
@@ -29,8 +37,10 @@ public class EnemyPatrol : MonoBehaviour
         if (currentWaypoint == waypoints.Length) 
         {
             currentWaypoint = 0;
-        }  
+        } 
+        
     }
+
 
     private void RotateEnemy(bool faceLeft) 
     {

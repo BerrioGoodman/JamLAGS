@@ -23,7 +23,8 @@ public class PatrolAI : MonoBehaviour
     {
 
         bool isMovingleft = waypoints[currentWaypoint].position.x < transform.position.x;
-        RotateEnemy(isMovingleft);
+        Debug.Log(isMovingleft);
+        //RotateEnemy(isMovingleft);
         
         if (transform.position != waypoints[currentWaypoint].position)
         {
@@ -33,6 +34,8 @@ public class PatrolAI : MonoBehaviour
         {
             StartCoroutine(Wait()); 
         }
+
+
     }
 
     IEnumerator Wait()
