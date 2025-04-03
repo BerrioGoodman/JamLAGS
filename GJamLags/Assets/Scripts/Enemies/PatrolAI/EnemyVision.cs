@@ -18,7 +18,7 @@ public class EnemyVision : MonoBehaviour
         DetectPlayer();
     }
 
-    void DetectPlayer()
+    void DetectPlayer() 
     {
         PlayerDetected = false;
         Player = null;
@@ -32,13 +32,13 @@ public class EnemyVision : MonoBehaviour
 
                 float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);//angulo de vision entre el enemigo y el jugador
 
-                if (angleToPlayer < viewAngle / 2)//dividimos entre 2 para tener un angulo de vision de izquiera y derecha
+                if (angleToPlayer < viewAngle /2)//dividimos entre 2 para tener un angulo de vision de izquiera y derecha
                 {
-                    float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
+                    float distanceToPlayer = Vector2.Distance(transform.position,target.transform.position);
 
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask);
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position,directionToPlayer,distanceToPlayer,obstacleMask);
 
-                    if (hit.collider == null && PlayerMovement.isVisible)
+                    if (hit.collider == null && PlayerMovement.isVisible) 
                     {
                         PlayerDetected = true;
                         Player = target.transform;
@@ -49,7 +49,7 @@ public class EnemyVision : MonoBehaviour
             }
         }
 
-
+        
     }
 
     private void OnDrawGizmos()
