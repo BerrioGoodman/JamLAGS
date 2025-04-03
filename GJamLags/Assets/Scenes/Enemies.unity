@@ -352,9 +352,8 @@ GameObject:
   - component: {fileID: 724848241}
   - component: {fileID: 724848243}
   - component: {fileID: 724848247}
-  - component: {fileID: 724848244}
-  - component: {fileID: 724848245}
-  - component: {fileID: 724848246}
+  - component: {fileID: 724848249}
+  - component: {fileID: 724848248}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -474,7 +473,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &724848244
+--- !u!114 &724848247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,7 +482,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 724848240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6b22e590dff454eab5a873971d068e, type: 3}
+  m_Script: {fileID: 11500000, guid: f55e2edd5fd32bf47bc57b76fd13b5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  distanceBetween: 4
+  enemyVision: {fileID: 0}
+  enemPatrol: {fileID: 0}
+--- !u!114 &724848248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724848240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7e4b0f030cdc641a7c1320a4f69ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
@@ -492,10 +507,11 @@ MonoBehaviour:
   - {fileID: 300439709}
   - {fileID: 268896647}
   - {fileID: 1533409926}
-  enemySpeed: 3
-  EnemyVision: {fileID: 724848245}
-  AIchase: {fileID: 724848247}
---- !u!114 &724848245
+  patrolSpeed: 3
+  chaseSpeed: 4
+  chaseDistance: 4
+  EnemyVision: {fileID: 724848249}
+--- !u!114 &724848249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -515,44 +531,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  PlayerMovement: {fileID: 5310569805159552041, guid: 924aefa39e497a14da9a8e8a835507b1, type: 3}
---- !u!114 &724848246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724848240}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fef633b1a8b298048a2ae2de2d3e2a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 1319004011}
-  - {fileID: 987435879}
-  - {fileID: 300439709}
-  - {fileID: 268896647}
-  - {fileID: 1533409926}
-  patrolSpeed: 3
-  minDistance: 0.2
-  waitTime: 1.5
---- !u!114 &724848247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724848240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55e2edd5fd32bf47bc57b76fd13b5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  distanceBetween: 4
-  enemyVision: {fileID: 724848245}
-  enemPatrol: {fileID: 724848244}
+  PlayerMovement: {fileID: 1456540689}
 --- !u!1 &987435878
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +731,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 143946119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456540689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5310569805159552041, guid: 924aefa39e497a14da9a8e8a835507b1, type: 3}
+  m_PrefabInstance: {fileID: 714562115}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd690322c671beb41b52b59efd43d69d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1533409925
 GameObject:
   m_ObjectHideFlags: 0
