@@ -56,15 +56,7 @@ public class EnemyAI : MonoBehaviour
                 break;
             case enemyState.Chase:
                 Chase();
-<<<<<<< Updated upstream
-                CheckAttackConditions(); // Nueva verificación
-=======
-                checkAttackConditions();
-                break;
-            case enemyState.Attack:
-                Attack();
-                checkIfPlayerOutOfRange();
->>>>>>> Stashed changes
+                CheckAttackConditions(); // Nueva verificaciï¿½n
                 break;
             case enemyState.Attack:
                 Attack(); // Nuevo estado
@@ -74,7 +66,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
 
     #region attack
     private void Attack()
@@ -93,12 +84,12 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator PerformAttack()
     {
-        Debug.Log("ATAQUE - Activando hitbox de daño");
+        Debug.Log("ATAQUE - Activando hitbox de daï¿½o");
         attackHitbox.enabled = true;
 
         yield return new WaitForSeconds(0.2f);
 
-        Debug.Log("ATAQUE - Desactivando hitbox de daño");
+        Debug.Log("ATAQUE - Desactivando hitbox de daï¿½o");
         attackHitbox.enabled = false;
     }
 
@@ -106,7 +97,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & playerLayer) != 0)
         {
-            Debug.Log("¡ATAQUE CONECTADO! - Jugador golpeado");
+            Debug.Log("ï¿½ATAQUE CONECTADO! - Jugador golpeado");
             //logica de player health
         }
     }
@@ -128,10 +119,6 @@ public class EnemyAI : MonoBehaviour
     #endregion
 
     #region Patrol
-=======
-    #region funciones
-    //Patrullaje del enemigo
->>>>>>> Stashed changes
     private void Patrol()
     {
         if (waypoints.Length == 0) return;//si no hay waypoint, entonces no camina
@@ -156,10 +143,7 @@ public class EnemyAI : MonoBehaviour
     }
     #endregion patrol
 
-<<<<<<< Updated upstream
     #region chase
-=======
->>>>>>> Stashed changes
     //persecucion enemigo
     private void Chase()
     {
@@ -175,50 +159,8 @@ public class EnemyAI : MonoBehaviour
     }
     #endregion
 
-<<<<<<< Updated upstream
     #region transitions
     private void checkForPlayer()
-=======
-    private void Attack() 
-    {
-        //detener el movimiento durante el ataque
-        transform.position = transform.position;
-
-        //activar hitbox y hacer daño
-        if (Time.time - _lastAttackTime >= attackCooldown)
-        {
-            _lastAttackTime = Time.time;
-            
-            StartCoroutine(performAttack());
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
-        {
-            Debug.Log("Ataque conseguido");
-            Debug.DrawRay(collision.transform.position, Vector2.up * 2f, Color.red, 2f);
-        }
-
-    }
-
-    private IEnumerator performAttack() 
-    {
-        //activar la hitbox
-        attackHitbox.enabled = true;
-
-        //esperar un frame para detectar colisiones
-        yield return new WaitForSeconds(0.1f);
-
-        //desactivar hitbox despues del tiempo de ataque
-        attackHitbox.enabled = false;
-    }
-    #endregion
-
-
-    #region transiciones
-    private void checkForPlayer() 
->>>>>>> Stashed changes
     {
         if (EnemyVision.PlayerDetected && EnemyVision.Player != null)
         {
@@ -234,7 +176,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
     private void CheckAttackConditions()
     {
         if (EnemyVision.Player == null) return;
@@ -245,53 +186,25 @@ public class EnemyAI : MonoBehaviour
         if (distance <= attackRange)
         {
             Debug.Log("Jugador en rango de ataque - Cambiando a estado ATAQUE");
-=======
-    private void checkAttackConditions() 
-    {
-        if (EnemyVision.Player == null) return;
-
-        float distanceToPlayer = Vector2.Distance(transform.position, EnemyVision.Player.position);
-        if (distanceToPlayer <= attackRange)
-        {
->>>>>>> Stashed changes
             currentState = enemyState.Attack;
         }
     }
 
-<<<<<<< Updated upstream
     private void CheckIfPlayerOutOfRange()
     {
         if (EnemyVision.Player == null)
         {
             Debug.Log("Jugador perdido - Volviendo a PATRULLA");
-=======
-    //vuelve a chase si el enemigo esta fuera de rango
-    private void checkIfPlayerOutOfRange() 
-    {
-        if (EnemyVision.Player == null) 
-        {
->>>>>>> Stashed changes
             currentState = enemyState.Patrol;
             return;
         }
 
-<<<<<<< Updated upstream
         float distance = Vector2.Distance(transform.position, EnemyVision.Player.position);
         if (distance > attackRange)
         {
-            Debug.Log("Jugador fuera de rango - Volviendo a PERSECUCIÓN");
-=======
-        float distanceToPlayer = Vector2.Distance(transform.position, EnemyVision.Player.position);
-
-        if (distanceToPlayer > attackRange)
-        {
->>>>>>> Stashed changes
+            Debug.Log("Jugador fuera de rango - Volviendo a PERSECUCIï¿½N");
             currentState = enemyState.Chase;
         }
     }
     #endregion
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }
