@@ -5,22 +5,13 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     //Estamos definiendo los posibles estados del enemigo
-    public enum enemyState
+    public enum enemyState 
     {
         Patrol,
-        Chase,
-        Attack
+        Chase
     }
 
     #region variables
-
-    [Header("Attack settings")]
-    [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private int attackDamage = 10;
-    [SerializeField] private float attackCooldown = 2f;
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private BoxCollider2D attackHitbox;
-
     [Header("Patrol settings")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private float patrolSpeed = 3;
@@ -43,12 +34,11 @@ public class EnemyAI : MonoBehaviour
 
     //Inicializamos el estado inicial en patrullaje
     private enemyState currentState = enemyState.Patrol;
-    private float lastAttackTime;
     #endregion
     void Update()
     {
         //Evaluamos en cada frame el estado en el que se puede encontrar el enemigo
-        switch (currentState)
+        switch (currentState) 
         {
             case enemyState.Patrol:
                 Patrol();
@@ -56,6 +46,7 @@ public class EnemyAI : MonoBehaviour
                 break;
             case enemyState.Chase:
                 Chase();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                 checkIfPlayerLost();
@@ -83,11 +74,16 @@ public class EnemyAI : MonoBehaviour
 >>>>>>> parent of d9bef5e (changes)
 =======
 >>>>>>> parent of 09f1a8e (Revert "Merge branch 'DevAlejo'")
+=======
+                checkIfPlayerLost();
+                break;
+>>>>>>> parent of f679069 (state machine meele enemies)
         }
     }
 
 <<<<<<< Updated upstream
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     //Patrullaje del enemigo
@@ -206,29 +202,33 @@ public class EnemyAI : MonoBehaviour
 >>>>>>> Stashed changes
     private void Patrol()
 >>>>>>> parent of 09f1a8e (Revert "Merge branch 'DevAlejo'")
+=======
+    //Patrullaje del enemigo
+    private void Patrol() 
+>>>>>>> parent of f679069 (state machine meele enemies)
     {
         if (waypoints.Length == 0) return;//si no hay waypoint, entonces no camina
 
         Transform target = waypoints[currentWaypoint];//waypoint objetivo
-        transform.position = Vector2.MoveTowards(transform.position, target.position, patrolSpeed * Time.deltaTime);//movimiento hacia el waypoint
+        transform.position = Vector2.MoveTowards(transform.position,target.position,patrolSpeed * Time.deltaTime);//movimiento hacia el waypoint
 
         //Rotacion del patrullaje
         bool isMovingLeft = target.position.x < transform.position.x;
-        transform.rotation = Quaternion.Euler(0, isMovingLeft ? 180 : 0, 0);
+        transform.rotation = Quaternion.Euler(0, isMovingLeft ? 180 : 0,0);
 
         //actualizamos la posicion del waypoint
-        if (Vector2.Distance(transform.position, target.position) < 0.1f)
+        if (Vector2.Distance(transform.position, target.position) < 0.1f) 
         {
             currentWaypoint = currentWaypoint + 1;
         }
 
-        if (currentWaypoint == waypoints.Length)
+        if (currentWaypoint == waypoints.Length) 
         {
             currentWaypoint = 0;
         }
     }
-    #endregion patrol
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -241,8 +241,11 @@ public class EnemyAI : MonoBehaviour
 =======
 >>>>>>> Stashed changes
 >>>>>>> parent of 09f1a8e (Revert "Merge branch 'DevAlejo'")
+=======
+
+>>>>>>> parent of f679069 (state machine meele enemies)
     //persecucion enemigo
-    private void Chase()
+    private void Chase() 
     {
         if (EnemyVision.Player == null) return;//Si no detecta ningun enemigo no lo persigue
 
@@ -254,8 +257,8 @@ public class EnemyAI : MonoBehaviour
         //direction.Normalize();
         transform.rotation = Quaternion.Euler(0, direction.x < 0 ? 180 : 0, 0);
     }
-    #endregion
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     private void checkForPlayer() 
@@ -309,20 +312,24 @@ public class EnemyAI : MonoBehaviour
     #region transiciones
     private void checkForPlayer() 
 >>>>>>> Stashed changes
+=======
+    private void checkForPlayer() 
+>>>>>>> parent of f679069 (state machine meele enemies)
     {
-        if (EnemyVision.PlayerDetected && EnemyVision.Player != null)
+        if (EnemyVision.PlayerDetected && EnemyVision.Player != null) 
         {
             currentState = enemyState.Chase;
         }
     }
 
-    private void checkIfPlayerLost()
+    private void checkIfPlayerLost() 
     {
-        if (!EnemyVision.PlayerDetected || EnemyVision.Player == null)
+        if (!EnemyVision.PlayerDetected || EnemyVision.Player == null) 
         {
             currentState = enemyState.Patrol;
         }
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -410,4 +417,6 @@ public class EnemyAI : MonoBehaviour
 =======
 >>>>>>> Stashed changes
 >>>>>>> parent of 09f1a8e (Revert "Merge branch 'DevAlejo'")
+=======
+>>>>>>> parent of f679069 (state machine meele enemies)
 }
