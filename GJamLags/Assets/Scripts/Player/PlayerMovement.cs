@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField] private float speed = 5f;
     private Vector2 movement;
+    [SerializeField] private Animator animator;
     [Header("Invisible Mechanic")]
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Color color1, color2;
@@ -48,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         //Inputs for movement
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        //Animations
+        AnimatePlayer();
         //Dash Coroutine
         if (Input.GetKeyDown(KeyCode.C) && canDash) StartCoroutine(Dash());
         //Invisible Coroutine
@@ -113,5 +116,25 @@ public class PlayerMovement : MonoBehaviour
     {
         invisiblePoints = 0f;
         invisibleBar.fillAmount = invisiblePoints / 5;
+    }
+    public void AnimatePlayer()
+    {
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+        animator.SetBool("isDashing", isDashing);
+        animator.SetBool("isVisible", isVisible);
+        if (movement.x < 0)
+        {
+            Vector3 lS = transform.localScale;
+            lS.x = -1;
+            transform.localScale = lS;
+        }
+        else
+        {
+            Vector3 lS = transform.localScale;
+            lS.x = 1;
+            transform.localScale = lS;
+        }
     }
 }
