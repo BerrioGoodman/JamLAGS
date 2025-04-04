@@ -8,10 +8,19 @@ public class EnemyAI : MonoBehaviour
     public enum enemyState 
     {
         Patrol,
-        Chase
+        Chase,
+        Attack
     }
 
     #region variables
+    [Header("Attack settings")]
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private int attackDamage = 10;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private BoxCollider2D attackHitbox;
+    private float lastAttackTime;
+
     [Header("Patrol settings")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private float patrolSpeed = 3;
@@ -38,13 +47,85 @@ public class EnemyAI : MonoBehaviour
                 break;
             case enemyState.Chase:
                 Chase();
-                checkIfPlayerLost();
+                CheckAttackConditions();
+                break;
+            case enemyState.Attack:
+                Attack();
+                CheckIfPlayerPutOfRange();
                 break;
         }
     }
 
 
     //Patrullaje del enemigo
+
+    private void Attack() 
+    {
+        Debug.Log("Estado: ATAQUE - Iniciando ataque");
+        transform.position = transform.position;
+
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            StartCoroutine(PerformAttack());
+            lastAttackTime = Time.time;
+        }
+    }
+
+    private IEnumerator PerformAttack() 
+    {
+        Debug.Log("ATAQUE - activando hitbox de daño");
+        attackHitbox.enabled = true;
+
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log("ATAQUE - desactivando hitbox de daño");
+        attackHitbox.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & playerLayer) != 0) 
+        {
+            Debug.Log("ATAQUE CONECTADO - jugador golpeado");
+            //lógica del player health
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (attackHitbox != null) 
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireCube(attackHitbox.bounds.center, attackHitbox.bounds.size);
+        }
+    }
+
+    private void CheckAttackConditions()
+    {
+        if (!EnemyVision.PlayerDetected || EnemyVision.Player == null) 
+        {
+            currentState = enemyState.Patrol;
+        }
+
+        float distance = Vector2.Distance(transform.position, EnemyVision.Player.position);
+        if (distance > attackRange) 
+        {
+            Debug.Log("Jugador fuera de rango - volviendo a persecucion");
+        }
+    }
+
+    private void CheckIfPlayerPutOfRange() 
+    {
+        if (EnemyVision.Player == null)
+        {
+            Debug.Log("Jugador perdido - volviendo a patrullar");
+            currentState = enemyState.Patrol;
+            return;
+        }
+    }
     private void Patrol() 
     {
         if (waypoints.Length == 0) return;//si no hay waypoint, entonces no camina
