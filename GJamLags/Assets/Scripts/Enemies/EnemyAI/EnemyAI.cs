@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Referencias")]
     [SerializeField] private EnemyVision EnemyVision;
+
+    [Header("Animaciones")]
+    [SerializeField] private Animator animator;
 
     //Inicializamos el estado inicial en patrullaje
     private enemyState currentState = enemyState.Patrol;
@@ -147,6 +151,7 @@ public class EnemyAI : MonoBehaviour
         {
             currentWaypoint = 0;
         }
+        animator.SetFloat("Speed", target.position.sqrMagnitude);
     }
 
 
@@ -162,6 +167,8 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = EnemyVision.Player.position - transform.position;
         //direction.Normalize();
         transform.rotation = Quaternion.Euler(0, direction.x < 0 ? 180 : 0, 0);
+
+        animator.SetFloat("Speed", EnemyVision.Player.position.sqrMagnitude);
     }
 
     private void checkForPlayer() 
