@@ -66,10 +66,11 @@ public class EnemyAI : MonoBehaviour
     private void Attack() 
     {
         Debug.Log("Estado: ATAQUE - Iniciando ataque");
-        transform.position = transform.position;
+        
 
         if (Time.time - lastAttackTime >= attackCooldown)
         {
+            
             StartCoroutine(PerformAttack());
             lastAttackTime = Time.time;
         }
@@ -84,6 +85,8 @@ public class EnemyAI : MonoBehaviour
 
         Debug.Log("ATAQUE - desactivando hitbox de daño");
         attackHitbox.enabled = false;
+
+        currentState = enemyState.Chase;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -112,12 +115,13 @@ public class EnemyAI : MonoBehaviour
         if (!EnemyVision.PlayerDetected || EnemyVision.Player == null) 
         {
             currentState = enemyState.Patrol;
+            return;
         }
 
         float distance = Vector2.Distance(transform.position, EnemyVision.Player.position);
-        if (distance > attackRange) 
+        if (distance <= attackRange && Time.time - lastAttackTime >= attackCooldown) 
         {
-            Debug.Log("Jugador fuera de rango - volviendo a persecucion");
+            currentState = enemyState.Attack;
         }
     }
 
