@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private const float maxLifeTime = 3f;
     private float lifeTime = 0f;
+    [SerializeField] private int damage = 1;
     [SerializeField] public Vector2 velocity;
     void Update()
     {
@@ -29,7 +30,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            Debug.Log("Choqué con el jugador");
+            Debug.Log("BALA CONECTADO - jugador golpeado");
+            PlayerMovement player = collision.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+            }
         }
     }
 }

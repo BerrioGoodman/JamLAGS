@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
         Debug.Log("ATAQUE - activando hitbox de daño");
         attackHitbox.enabled = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         Debug.Log("ATAQUE - desactivando hitbox de daño");
         attackHitbox.enabled = false;
@@ -94,7 +94,11 @@ public class EnemyAI : MonoBehaviour
         if (((1 << collision.gameObject.layer) & playerLayer) != 0) 
         {
             Debug.Log("ATAQUE CONECTADO - jugador golpeado");
-            //lógica del player health
+            PlayerMovement player = collision.GetComponent<PlayerMovement>();
+            if (player != null) 
+            {
+                player.TakeDamage(attackDamage);
+            }
         }
     }
 

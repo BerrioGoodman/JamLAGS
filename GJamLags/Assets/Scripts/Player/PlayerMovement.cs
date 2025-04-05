@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -135,6 +136,21 @@ public class PlayerMovement : MonoBehaviour
             Vector3 lS = transform.localScale;
             lS.x = 1;
             transform.localScale = lS;
+        }
+    }
+
+    public void TakeDamage(int damageAmount) 
+    {
+        if (isVisible) 
+        {
+            healthPoints -= damageAmount;
+            healthPoints = math.clamp(healthPoints, 0, 4);
+            healthView.fillAmount = healthPoints / 4f;
+
+            if (healthPoints <= 0) 
+            {
+                Debug.Log("Jugador derrotado");
+            }
         }
     }
 }
