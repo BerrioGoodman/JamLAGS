@@ -268,9 +268,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1491845706037561364, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1915616066463017872, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381019247226921061, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
+      propertyPath: m_Name
+      value: QuitButton
       objectReference: {fileID: 0}
     - target: {fileID: 4739143240374751116, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -311,6 +319,14 @@ PrefabInstance:
     - target: {fileID: 4739143240374751116, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903364958434160777, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
+      propertyPath: m_Name
+      value: CreditsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937581377735041485, guid: a6ebe723433351248a2e7ef0e2a8dbff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GotoCredits
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
