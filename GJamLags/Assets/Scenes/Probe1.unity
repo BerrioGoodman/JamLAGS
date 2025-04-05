@@ -662,6 +662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Devil
       objectReference: {fileID: 0}
+    - target: {fileID: 2094279663270875992, guid: ccf78dfb1acd45543981147779081de1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4169187862358215223, guid: ccf78dfb1acd45543981147779081de1, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 

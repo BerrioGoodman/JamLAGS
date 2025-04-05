@@ -47,6 +47,9 @@ TagManager:
   - name: Player/Enemy
     uniqueID: 4124095179
     locked: 0
+  - name: Walls
+    uniqueID: 4101517597
+    locked: 0
   - name: ambientation
     uniqueID: 3291603671
     locked: 0

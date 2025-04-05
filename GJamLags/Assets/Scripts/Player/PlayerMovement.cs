@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image healthView;
     [SerializeField] private float damage = 1f;
     private float timer;
+    [SerializeField] private BoxCollider2D collider2D;
+    [Header("Death settings")]
+    [SerializeField] private float deathRotation = 90f;
     void Start()
     {
         canDash = true;
@@ -42,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         healthPoints = 4f;
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        collider2D = GetComponent<BoxCollider2D>();
     }
     void Update()
     {
@@ -98,15 +102,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
-    //Health
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Damage"))
-        {
-            healthPoints -= damage;
-            healthView.fillAmount = healthPoints / 4f;
-        }
-    }
+    
     //Invisible power
     public void InvisiblePower()
     {
@@ -150,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             if (healthPoints <= 0) 
             {
                 Debug.Log("Jugador derrotado");
+                SceneManager.LoadScene("DeadScreen");
             }
         }
     }

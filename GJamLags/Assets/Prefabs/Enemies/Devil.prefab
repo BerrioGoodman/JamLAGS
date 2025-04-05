@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7109804989757633100}
   - component: {fileID: 4169187862358215223}
   - component: {fileID: 4280081151186660819}
+  - component: {fileID: 146541994267427396}
+  - component: {fileID: 5143502765717120035}
   m_Layer: 3
   m_Name: Devil
   m_TagString: Untagged
@@ -95,8 +97,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -170872117
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -95798530, guid: 4c403392e6470834188f414c6e61b1ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -173,12 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackHitbox: {fileID: 7109804989757633100}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  waypoints: []
   patrolSpeed: 3
   chaseSpeed: 4
   chaseDistance: 4
@@ -205,3 +202,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   PlayerMovement: {fileID: 0}
+--- !u!114 &146541994267427396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094279663270875992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9433c49306b1aff4880a19b88228c0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5143502765717120035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094279663270875992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7295127b23e7d6648931a75fdde4e87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotPattern: {fileID: 11400000, guid: 52c624bf136fdfc4a8101ebd669169ff, type: 2}
