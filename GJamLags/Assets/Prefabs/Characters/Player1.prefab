@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4282491410320889504}
   - component: {fileID: 7476054675144054636}
   - component: {fileID: 5279151114713146345}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,8 +95,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -170872117
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1828176367, guid: c3434b5f69cd3d44aa09a1fe2a0dad86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -209,3 +209,5 @@ MonoBehaviour:
   healthPoints: 0
   healthView: {fileID: 0}
   damage: 1
+  collider2D: {fileID: 7476054675144054636}
+  deathRotation: 90
