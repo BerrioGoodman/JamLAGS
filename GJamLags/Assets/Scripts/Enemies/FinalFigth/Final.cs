@@ -8,7 +8,7 @@ public class Final : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SurviveFinalFigth", 10f);
+        Invoke("SurviveFinalFigth", 80f);
     }
 
     // Update is called once per frame

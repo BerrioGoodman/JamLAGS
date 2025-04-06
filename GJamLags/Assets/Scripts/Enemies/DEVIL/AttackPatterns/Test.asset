@@ -17,12 +17,12 @@ MonoBehaviour:
   EndWait: 1
   PatternSetting:
   - NumbersOfBullets: 12
-    BulletSpped: 10
+    BulletSpped: 6
     CooldownAfterShot: 0.4
     PhaseOffset: 0
     AngleOffset: 0
-  - NumbersOfBullets: 4
-    BulletSpped: 10
+  - NumbersOfBullets: 8
+    BulletSpped: 6
     CooldownAfterShot: 0.4
     PhaseOffset: 0
     AngleOffset: 0

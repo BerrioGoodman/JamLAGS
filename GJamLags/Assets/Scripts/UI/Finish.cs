@@ -18,6 +18,6 @@ public class Finish : MonoBehaviour
 
     private void Victory()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Credits");
     }
 }
