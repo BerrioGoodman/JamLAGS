@@ -9,15 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a5e9603d17d6cd645a824515545a2587
   - enabled: 1
+    path: Assets/Scenes/GameLevel.unity
+    guid: 943bbb4c89430dd418bc8d92cc14ce39
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 948a8faa33db89b498b8f3c90ec93329
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
-    guid: 41d15b91cfc915a4ab1bdc5e49fd4686
+    path: Assets/Scenes/DeadScreen.unity
+    guid: ec80b079088a4d048b88b3b3b028700a
   - enabled: 1
     path: Assets/Scenes/FinalBoss.unity
     guid: 2e11059d9e74f004d9feb470b160a409
   - enabled: 1
-    path: Assets/Scenes/DeadScreen.unity
-    guid: ec80b079088a4d048b88b3b3b028700a
+    path: Assets/Scenes/Credits.unity
+    guid: 41d15b91cfc915a4ab1bdc5e49fd4686
   m_configObjects: {}

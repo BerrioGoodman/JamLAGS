@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     //Start to play the videogame
     public void PlayButton()
     {
-        SceneManager.LoadScene("Probe1");
+        SceneManager.LoadScene("GameLevel");
         Time.timeScale = 1.0f;
         PauseMenu.isPaused = false;
     }
